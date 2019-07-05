@@ -23,17 +23,19 @@ RUN locale-gen en_US en_US.UTF-8
 RUN update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 # install packages
-RUN apt update && apt install -y curl gnupg2 lsb-release
+RUN apt update && apt install -y curl gnupg2 lsb-release wget
 
 RUN curl http://repo.ros2.org/repos.key | apt-key add -
+RUN wget http://repo.ros2.org/repos.key -O - | apt-key add -
 
-RUN sh -c 'echo "deb [arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
 
-RUN apt-get update && apt-get install -f -y \
+RUN sh -c 'echo "deb [trusted=yes,arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
+
+RUN apt-get update && apt-get install -f -y --allow-unauthenticated \
   git cmake cmake-curses-gui vim pkg-config gcc g++ gdb clang clang-tidy clang-tools \
   sudo unzip wget build-essential \
-  ros-crystal-desktop ros-crystal-rqt* ros-crystal-tf2-sensor-msgs \
-  python3-colcon-common-extensions \
+  ros-dashing-desktop ros-dashing-rqt* ros-dashing-tf2-sensor-msgs libasio-dev libtinyxml2-dev \
+  python3-colcon-common-extensions python-rosdep \
   python3-argcomplete \
   python3-vcstool \
   build-essential \

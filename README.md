@@ -35,9 +35,7 @@ Copy turtlebot3.repos into your workspace
 Within docker run:
 ```
 vcs import src < turtlebot3.repos
-source /opt/ros/crystal/setup.bash
-colcon build --symlink-install --packages-select behaviortree_cpp
-source install/local_setup.bash
+source /opt/ros/dashing/setup.bash
 colcon build --symlink-install
 ```
 
@@ -49,7 +47,7 @@ Get yourself another beverage while waiting until everything compiled
 **Note**: In every new terminal ROS2 and the workspace should be sourced and the turtlebot3 model selected
 
 ```
-source /opt/ros/crystal/setup.bash
+source /opt/ros/dashing/setup.bash
 source install/local_setup.bash # within the workspace
 export TURTLEBOT3_MODEL=burger
 export GAZEBO_MODEL_PATH=~/ros/turtlebot3_ws/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models/:$GAZEBO_MODEL_PATH
